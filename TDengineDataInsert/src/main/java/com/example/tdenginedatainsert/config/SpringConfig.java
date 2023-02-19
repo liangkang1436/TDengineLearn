@@ -20,7 +20,8 @@ public class SpringConfig {
         Properties connProps = new Properties();
         connProps.setProperty(TSDBDriver.PROPERTY_KEY_CHARSET, "UTF-8");
         connProps.setProperty(TSDBDriver.PROPERTY_KEY_LOCALE, "zh_CN.UTF-8");
-        connProps.setProperty(TSDBDriver.PROPERTY_KEY_TIME_ZONE, "UTC+8");
+        // 设置时区
+        connProps.setProperty(TSDBDriver.PROPERTY_KEY_TIME_ZONE, "UTC-8");
         druidDataSource.setConnectProperties(connProps);
         return druidDataSource;
     }
