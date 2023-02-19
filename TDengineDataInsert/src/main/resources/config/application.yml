@@ -1,0 +1,190 @@
+server:
+  # 当前应用所在的Web服务器监听的本地端口
+  port: 8090
+  servlet:
+    context-path: /AnalogyData
+
+logging:
+  file:
+    # 相对路径为用户工作的目录
+    path: logs/
+  level:
+    root: info
+
+task-config:
+  # 3秒插入一次，表示数据更新的时间
+  insertInterval: 3
+  # 标签列数，标签排在csv文件的最后面
+  tagColCount: 3
+  # 数据文件位置
+  dataFilePath: analogyData
+  # 数据文件位置
+  coordinateFilePath: coordinateData
+  #  表信息
+  tables:
+    sjhj_hai_qzj:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - hx
+      - mbjd
+      - mbwd
+      - mbgd
+      - mbsd
+      - mbhx
+      - mblx
+      - dqxc
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - ryzt
+      - rysfz
+      - id
+      - sbbh
+      - name
+    sjhj_hai_yjfjdd:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - gjddsl
+      - id
+      - sbbh
+      - name
+    sjhj_huo_dfddfsc:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - fsjc
+      - dyzdxx
+      - mbjd
+      - mbwd
+      - mbgd
+      - mbsd
+      - mbhx
+      - mblx
+      - ryzt
+      - rysfz
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - id
+      - sbbh
+      - name
+    sjhj_huo_dfddysc:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - kmzzt
+      - txzhllzt
+      - rwzxzt
+      - sfzx
+      - id
+      - sbbh
+      - name
+    sjhj_kong_jsixteen:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - gjddsl
+      - id
+      - sbbh
+      - name
+    sjhj_kong_jten:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - gjddsl
+      - id
+      - sbbh
+      - name
+    sjhj_lu_ldshjp:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - id
+      - sbbh
+      - name
+    sjhj_lu_lshjp:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - id
+      - sbbh
+      - name
+    sjhj_lu_tjzjc:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - id
+      - sbbh
+      - name
+    sjhj_lu_tk:
+      - time
+      - jd
+      - wd
+      - gd
+      - sd
+      - syyl
+      - dysyl
+      - sbzt
+      - rwzxzt
+      - sfzx
+      - id
+      - sbbh
+      - name
+

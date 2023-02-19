@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.8</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>TDengineDataInsert</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>TDengineDataInsert</name>
+    <description>TDengineDataInsert</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <docker.auth.username>liangkang1436</docker.auth.username>
+        <docker.auth.password>2_7q/8BK?gdH%5#</docker.auth.password>
+        <!-- 斜线分割，不能有大写字母-->
+        <docker.image.name>tdengine-data-insert</docker.image.name>
+
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.taosdata.jdbc</groupId>
+            <artifactId>taos-jdbcdriver</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- 打包docker镜像  -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+                    <from>
+                        <!-- 使用的公司仓库，可以替换，必须添加host 192.168.115.208 harbor.dameng.io -->
+                        <image>
+                            openjdk:8u342-jre@sha256:46a298905a037f46e5bc93aae3b061e0e148beab5098e6d0c26d5e7981ac36e3
+                        </image>
+                        <auth>
+                            <username>${docker.auth.username}</username>
+                            <password>${docker.auth.password}</password>
+                        </auth>
+                    </from>
+                    <to>
+                        <!-- 镜像名称和tag，用英文冒号分割-->
+                        <!-- 使用属性 docker.image.name 表示打出的image的名称，不建议使用当前构建的名字 ${project.name} ，因为 image 的名字不能有大写字母-->
+                        <image>${docker.image.name}:1.0</image>
+                        <!--                        <auth>-->
+                        <!--                            <username>${docker.auth.username}</username>-->
+                        <!--                            <password>${docker.auth.password}</password>-->
+                        <!--                        </auth>-->
+                    </to>
+                    <outputPaths>
+                        <tar>${project.build.directory}/${docker.image.name}-image.tar</tar>
+                        <digest>${project.build.directory}/${docker.image.name}-image.digest</digest>
+                        <imageId>${project.build.directory}/${docker.image.name}-image.id</imageId>
+                        <imageJson>${project.build.directory}/${docker.image.name}-image.json</imageJson>
+                    </outputPaths>
+                    <!--容器相关的属性-->
+                    <container>
+                        <!-- 主程序类 -->
+                        <mainClass>com.example.tdenginedatainsert.TDengineDataInsertApplication</mainClass>
+                        <!--jvm内存参数-->
+                        <jvmFlags>
+                            <jvmFlag>-XX:+UseContainerSupport</jvmFlag>
+                            <jvmFlag>-XX:InitialRAMPercentage=50.0</jvmFlag>
+                            <jvmFlag>-XX:MinRAMPercentage=50.0</jvmFlag>
+                            <jvmFlag>-XX:MaxRAMPercentage=75.0</jvmFlag>
+                            <jvmFlag>-Xss512K</jvmFlag>
+                            <jvmFlag>-XX:MetaspaceSize=256m</jvmFlag>
+                            <jvmFlag>-XX:MaxMetaspaceSize=512m</jvmFlag>
+                            <jvmFlag>-Djava.awt.headless=true</jvmFlag>
+                            <jvmFlag>-Dfile.encoding=utf-8</jvmFlag>
+                            <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                            <jvmFlag>-XX:+DisableExplicitGC</jvmFlag>
+                            <jvmFlag>-XX:-UseAdaptiveSizePolicy</jvmFlag>
+                            <jvmFlag>-Duser.timezone=GMT+08</jvmFlag>
+                        </jvmFlags>
+                        <!--要暴露的端口-->
+                        <ports>
+                            <port>8090</port>
+                        </ports>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                    </container>
+                    <!--开启允许上传镜像到仓库中-->
+                    <!--                    <allowInsecureRegistries>true</allowInsecureRegistries>-->
+                    <!--外部文件-->
+                    <!-- 注意两点路径的对应： -->
+                    <!-- 1. 项目运行时的工作路径，就是打出的docker包运行起来的容器的Linux系统的根路径 -->
+                    <!-- 2. extraDirectories 的 paths 的 path 的 into 标签中指定的相对路径的起点，是打出的docker包运行起来的容器的Linux系统的根路径 -->
+                    <extraDirectories>
+                        <paths>
+                            <path>
+                                <from>${project.build.directory}/classes/config</from>
+                                <into>/config</into>
+                            </path>
+                            <path>
+                                <from>${project.build.directory}/classes/coordinateData</from>
+                                <into>/coordinateData</into>
+                            </path>
+                        </paths>
+                    </extraDirectories>
+                </configuration>
+            </plugin>
+            <!-- 打包docker镜像 end -->
+        </plugins>
+    </build>
+
+</project>
