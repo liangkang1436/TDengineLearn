@@ -15,7 +15,7 @@ task-config:
   # 3秒插入一次，表示数据更新的时间
   insertInterval: 3
   # 标签列数，标签排在csv文件的最后面
-  tagColCount: 3
+  tagColCount: 5
   # 数据文件位置
   dataFilePath: analogyData
   # 数据文件位置
@@ -46,6 +46,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_hai_yjfjdd:
       - time
       - jd
@@ -61,6 +63,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_huo_dfddfsc:
       - time
       - jd
@@ -85,6 +89,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_huo_dfddysc:
       - time
       - jd
@@ -101,6 +107,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_kong_jsixteen:
       - time
       - jd
@@ -116,6 +124,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_kong_jten:
       - time
       - jd
@@ -131,6 +141,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_lu_ldshjp:
       - time
       - jd
@@ -145,6 +157,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_lu_lshjp:
       - time
       - jd
@@ -159,6 +173,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_lu_tjzjc:
       - time
       - jd
@@ -173,6 +189,8 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
     sjhj_lu_tk:
       - time
       - jd
@@ -187,4 +205,6 @@ task-config:
       - id
       - sbbh
       - name
+      - dept
+      - army
 

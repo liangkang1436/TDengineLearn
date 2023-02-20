@@ -48,7 +48,7 @@ public class DataFileGenerateService {
         // (字符串)
         // rysfz,fsjc dyzdxx
 
-        //         id ，sbbh(字符串), name(字符串),
+        //         id ，sbbh(字符串), name(字符串), dept army
         //         time,
 
         // 清空
@@ -215,9 +215,11 @@ public class DataFileGenerateService {
                     continue;
                 }
                 // 3.2 准备信息
-                //         id ，sbbh(字符串), name(字符串),
+                //         id ，sbbh(字符串), name(字符串), dept army
                 //         time,
                 String deviceType = getDeviceType(table);
+                String armyType = getArmyType(table);
+                String deptName = getDept(table);
                 String name = deviceType +"_"+ itemId;
                 // 其他列
                 // 流只能用一次，所以每次都得重新初始化
@@ -254,6 +256,10 @@ public class DataFileGenerateService {
                                 csvData.append("'" + deviceType + "',");
                             } else if (colName.equals("name")) {
                                 csvData.append("'" + name + "',");
+                            } else if (colName.equals("dept")) {
+                                csvData.append("'" + deptName + "',");
+                            } else if (colName.equals("army")) {
+                                csvData.append("'" + armyType + "',");
                             }else if (colName.equals("jd")||colName.equals("mbjd")) {
                                 csvData.append(jd + ",");
                             }else if (colName.equals("wd")||colName.equals("mbwd")) {
@@ -309,6 +315,67 @@ public class DataFileGenerateService {
             return "DFDDFSC";
         } else if (tableName.endsWith("DFDDYSC".toLowerCase())) {
             return "DFDDYSC";
+        }
+        return "";
+    }
+    private String getArmyType(String tableName) {
+        //     设备编号：01：TJZJC，02：TK，03：LSHJP，04：LDSHJP ，05：QZJ ，06：YJFJDD ，07：TEN ，08：SIXTEEN ，09：DFDDFSC ，10：DFDDYSC';
+        if (tableName.endsWith("TJZJC".toLowerCase())) {
+            return "陆军";
+        } else if (tableName.endsWith("TK".toLowerCase())) {
+            return "陆军";
+        } else if (tableName.endsWith("LSHJP".toLowerCase())) {
+            return "陆军";
+        } else if (tableName.endsWith("LDSHJP".toLowerCase())) {
+            return "陆军";
+        } else if (tableName.endsWith("QZJ".toLowerCase())) {
+            return "海军";
+        } else if (tableName.endsWith("YJFJDD".toLowerCase())) {
+            return "海军";
+        } else if (tableName.endsWith("TEN".toLowerCase())) {
+            return "空军";
+        } else if (tableName.endsWith("SIXTEEN".toLowerCase())) {
+            return "空军";
+        } else if (tableName.endsWith("DFDDFSC".toLowerCase())) {
+            return "网军";
+        } else if (tableName.endsWith("DFDDYSC".toLowerCase())) {
+            return "网军";
+        }
+        return "";
+    }
+
+    private String getDept(String tableName) {
+        // 上海物流分部
+        // 江苏物流分部
+        // 浙江物流分部
+        // 广东物流分部
+        // 广西物流分部
+        // 海南物流分部
+        // 湖北物流分部
+        // 湖南物流分部
+        // 河南物流分部
+        // 四川物流分部
+        //     设备编号：01：TJZJC，02：TK，03：LSHJP，04：LDSHJP ，05：QZJ ，06：YJFJDD ，07：TEN ，08：SIXTEEN ，09：DFDDFSC ，10：DFDDYSC';
+        if (tableName.endsWith("TJZJC".toLowerCase())) {
+            return "上海物流分部";
+        } else if (tableName.endsWith("TK".toLowerCase())) {
+            return "江苏物流分部";
+        } else if (tableName.endsWith("LSHJP".toLowerCase())) {
+            return "浙江物流分部";
+        } else if (tableName.endsWith("LDSHJP".toLowerCase())) {
+            return "广东物流分部";
+        } else if (tableName.endsWith("QZJ".toLowerCase())) {
+            return "广西物流分部";
+        } else if (tableName.endsWith("YJFJDD".toLowerCase())) {
+            return "海南物流分部";
+        } else if (tableName.endsWith("TEN".toLowerCase())) {
+            return "湖北物流分部";
+        } else if (tableName.endsWith("SIXTEEN".toLowerCase())) {
+            return "湖南物流分部";
+        } else if (tableName.endsWith("DFDDFSC".toLowerCase())) {
+            return "河南物流分部";
+        } else if (tableName.endsWith("DFDDYSC".toLowerCase())) {
+            return "四川物流分部";
         }
         return "";
     }
