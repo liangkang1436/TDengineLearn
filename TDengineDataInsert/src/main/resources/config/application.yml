@@ -12,6 +12,8 @@ logging:
     root: info
 
 task-config:
+  # 目标主机
+  targetHost: localhost
   # 3秒插入一次，表示数据更新的时间
   insertInterval: 3
   # 标签列数，标签排在csv文件的最后面

@@ -4,6 +4,7 @@ import com.example.tdenginedatainsert.config.TaskConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
@@ -47,6 +48,7 @@ public class DataService {
     private void readFile2Database(String table, List<File> datafiles) {
         for (File datafile : datafiles) {
             // 开启线程读取数据，传入配置，传入文件
+            log.info("开始处理 " + datafile.getName() + " 中的数据");
             Thread thread = new Thread(() -> {
                 while (!Thread.currentThread().isInterrupted()) {
                     // 考虑中断
@@ -66,11 +68,18 @@ public class DataService {
                                     // 取主表的表明和子表的id来拼凑出一个子表表名
                                     String childTableName = table.toLowerCase() + "_" + tagList.get(0);
                                     // 第一列不看，自动填充，为当前时间
-                                    int update = jdbcTemplate.update("INSERT INTO " + childTableName + " USING " + table + " TAGS (" + StringUtils.join(tagList, ",") + ") VALUES (NOW, " + StringUtils.join(dataList, ",") + ");");
+                                    log.info("开始处理：" + line);
+                                    int update = 0;
+                                    try {
+                                        update = jdbcTemplate.update("INSERT INTO " + childTableName + " USING " + table + " TAGS (" + StringUtils.join(tagList, ",") + ") VALUES (NOW, " + StringUtils.join(dataList, ",") + ");");
+                                    } catch (DataAccessException e) {
+                                        e.printStackTrace();
+                                        throw new RuntimeException(e);
+                                    }
                                     if (update == 1) {
-                                        log.info(table + " 成功写入一条消息");
+                                        log.info(table + " 成功写入一条消息" + line);
                                     } else {
-                                        log.info(table + " 写入失败！！！");
+                                        log.info(table + " 表的 " + line + " 写入失败！！！");
                                     }
                                     // 暂停几秒钟
                                     try {
@@ -113,6 +122,7 @@ public class DataService {
             jdbcTemplate.update(sql);
         }
     }
+
     public String test() {
         return jdbcTemplate.queryForObject("select now", String.class);
     }
@@ -132,7 +142,7 @@ public class DataService {
             try {
                 Stream<Path> stream = Files.list(dataFolder);
                 stream.forEach((chlilPath) -> {
-                    log.info(chlilPath.getFileName());
+                    // log.info(chlilPath.getFileName());
                     // chlilPath.getFileName() 返回的是 Path，必须 toString() 返回的才是 String
                     if (chlilPath.getFileName().toString().startsWith(table)) {
                         File file = chlilPath.toFile();

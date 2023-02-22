@@ -19,6 +19,7 @@ public class TaskConfig {
 
     private Map<String, List<String>> tables;
 
+    private String targetHost;
     private int insertInterval;
     private int tagColCount;
     private String dataFilePath;

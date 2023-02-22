@@ -158,7 +158,7 @@ public class DataFileGenerateService {
             try {
                 Stream<Path> stream = Files.list(coorDataFolder);
                 stream.forEach((chlilPath) -> {
-                    log.info(chlilPath.getFileName());
+                    // log.info(chlilPath.getFileName());
                     // chlilPath.getFileName() 返回的是 Path，必须 toString() 返回的才是 String
                     if (chlilPath.getFileName().toString().startsWith(table)) {
                         File file = chlilPath.toFile();
