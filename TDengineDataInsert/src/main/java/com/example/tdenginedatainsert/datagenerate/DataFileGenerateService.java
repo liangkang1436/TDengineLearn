@@ -49,6 +49,7 @@ public class DataFileGenerateService {
         // rysfz,fsjc dyzdxx
 
         //         id ，sbbh(字符串), name(字符串), dept army
+        // warzone
         //         time,
 
         // 清空
@@ -220,6 +221,7 @@ public class DataFileGenerateService {
                 String deviceType = getDeviceType(table);
                 String armyType = getArmyType(table);
                 String deptName = getDept(table);
+                String warzone = "东部战区";
                 String name = deviceType +"_"+ itemId;
                 // 其他列
                 // 流只能用一次，所以每次都得重新初始化
@@ -258,6 +260,8 @@ public class DataFileGenerateService {
                                 csvData.append("'" + name + "',");
                             } else if (colName.equals("dept")) {
                                 csvData.append("'" + deptName + "',");
+                            } else if (colName.equals("warzone")) {
+                                csvData.append("'" + warzone + "',");
                             } else if (colName.equals("army")) {
                                 csvData.append("'" + armyType + "',");
                             }else if (colName.equals("jd")||colName.equals("mbjd")) {
@@ -345,37 +349,26 @@ public class DataFileGenerateService {
     }
 
     private String getDept(String tableName) {
-        // 上海物流分部
-        // 江苏物流分部
-        // 浙江物流分部
-        // 广东物流分部
-        // 广西物流分部
-        // 海南物流分部
-        // 湖北物流分部
-        // 湖南物流分部
-        // 河南物流分部
-        // 四川物流分部
-        //     设备编号：01：TJZJC，02：TK，03：LSHJP，04：LDSHJP ，05：QZJ ，06：YJFJDD ，07：TEN ，08：SIXTEEN ，09：DFDDFSC ，10：DFDDYSC';
         if (tableName.endsWith("TJZJC".toLowerCase())) {
-            return "上海物流分部";
+            return taskConfig.getTable2Dept().get("TJZJC");
         } else if (tableName.endsWith("TK".toLowerCase())) {
-            return "江苏物流分部";
+            return taskConfig.getTable2Dept().get("TK");
         } else if (tableName.endsWith("LSHJP".toLowerCase())) {
-            return "浙江物流分部";
+            return taskConfig.getTable2Dept().get("LSHJP");
         } else if (tableName.endsWith("LDSHJP".toLowerCase())) {
-            return "广东物流分部";
+            return taskConfig.getTable2Dept().get("LDSHJP");
         } else if (tableName.endsWith("QZJ".toLowerCase())) {
-            return "广西物流分部";
+            return taskConfig.getTable2Dept().get("QZJ");
         } else if (tableName.endsWith("YJFJDD".toLowerCase())) {
-            return "海南物流分部";
+            return taskConfig.getTable2Dept().get("YJFJDD");
         } else if (tableName.endsWith("TEN".toLowerCase())) {
-            return "湖北物流分部";
+            return taskConfig.getTable2Dept().get("TEN");
         } else if (tableName.endsWith("SIXTEEN".toLowerCase())) {
-            return "湖南物流分部";
+            return taskConfig.getTable2Dept().get("SIXTEEN");
         } else if (tableName.endsWith("DFDDFSC".toLowerCase())) {
-            return "河南物流分部";
+            return taskConfig.getTable2Dept().get("DFDDFSC");
         } else if (tableName.endsWith("DFDDYSC".toLowerCase())) {
-            return "四川物流分部";
+            return taskConfig.getTable2Dept().get("DFDDYSC");
         }
         return "";
     }

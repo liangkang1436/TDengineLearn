@@ -17,11 +17,23 @@ task-config:
   # 3秒插入一次，表示数据更新的时间
   insertInterval: 3
   # 标签列数，标签排在csv文件的最后面
-  tagColCount: 5
+  tagColCount: 6
   # 数据文件位置
   dataFilePath: analogyData
   # 数据文件位置
   coordinateFilePath: coordinateData
+  # 修改此配置之后需要重新建表
+  table2Dept:
+    TJZJC: 上海物流分部
+    TK: 江苏物流分部
+    LSHJP: 浙江物流分部
+    LDSHJP: 广东物流分部
+    QZJ: 广西物流分部
+    YJFJDD: 海南物流分部
+    TEN: 湖北物流分部
+    SIXTEEN: 湖南物流分部
+    DFDDFSC: 河南物流分部
+    DFDDYSC: 四川物流分部
   #  表信息
   tables:
     sjhj_hai_qzj:
@@ -49,6 +61,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_hai_yjfjdd:
       - time
@@ -66,6 +79,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_huo_dfddfsc:
       - time
@@ -92,6 +106,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_huo_dfddysc:
       - time
@@ -110,6 +125,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_kong_jsixteen:
       - time
@@ -127,6 +143,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_kong_jten:
       - time
@@ -144,6 +161,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_lu_ldshjp:
       - time
@@ -160,6 +178,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_lu_lshjp:
       - time
@@ -176,6 +195,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_lu_tjzjc:
       - time
@@ -192,6 +212,7 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
     sjhj_lu_tk:
       - time
@@ -208,5 +229,6 @@ task-config:
       - sbbh
       - name
       - dept
+      - warzone
       - army
 

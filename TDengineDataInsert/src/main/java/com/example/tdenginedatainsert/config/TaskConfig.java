@@ -18,7 +18,7 @@ import java.util.Map;
 public class TaskConfig {
 
     private Map<String, List<String>> tables;
-
+    private Map<String, String> table2Dept;
     private String targetHost;
     private int insertInterval;
     private int tagColCount;
