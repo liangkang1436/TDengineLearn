@@ -73,8 +73,9 @@ public class DataService {
                                     try {
                                         update = jdbcTemplate.update("INSERT INTO " + childTableName + " USING " + table + " TAGS (" + StringUtils.join(tagList, ",") + ") VALUES (NOW, " + StringUtils.join(dataList, ",") + ");");
                                     } catch (DataAccessException e) {
-                                        e.printStackTrace();
-                                        throw new RuntimeException(e);
+                                        // 不报错
+                                        // e.printStackTrace();
+                                        // throw new RuntimeException(e);
                                     }
                                     if (update == 1) {
                                         log.info(table + " 成功写入一条消息" + line);
