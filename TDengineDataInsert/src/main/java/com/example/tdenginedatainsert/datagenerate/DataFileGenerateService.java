@@ -245,8 +245,8 @@ public class DataFileGenerateService {
                             return;
                         }
                         String[] coorArr = coorStr.split(",");
-                        String jd = coorArr[0];
-                        String wd = coorArr[1];
+                        String jd = coorArr[0].trim();
+                        String wd = coorArr[1].trim();
                         List<String> allCols = taskConfig.getTables().get(table);
                         StringBuffer csvData = new StringBuffer("");
                         for (String colName : allCols) {
