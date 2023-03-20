@@ -221,7 +221,7 @@ public class DataFileGenerateService {
                 String deviceType = getDeviceType(table);
                 String armyType = getArmyType(table);
                 String deptName = getDept(table);
-                String warzone = "东部战区";
+                String warzone = "DBZQ";
                 String name = deviceType +"_"+ itemId;
                 // 其他列
                 // 流只能用一次，所以每次都得重新初始化
