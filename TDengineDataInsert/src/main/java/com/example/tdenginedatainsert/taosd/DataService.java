@@ -65,13 +65,18 @@ public class DataService {
                                     List<String> colData = Arrays.asList(line.split(","));
                                     List<String> tagList = colData.subList(colData.size() - taskConfig.getTagColCount(), colData.size());
                                     List<String> dataList = colData.subList(1, colData.size() - taskConfig.getTagColCount());
+                                    // 指定列，插入更精确，突然加列也不会报错
+                                    // 列信息拆分为tag列和数据列
+                                    List<String> colList = taskConfig.getTables().get(table);
+                                    List<String> tagColList = colList.subList(colList.size() - taskConfig.getTagColCount(), colList.size());
+                                    List<String> dataColList = colList.subList(0, colList.size() - taskConfig.getTagColCount());
                                     // 取主表的表明和子表的id来拼凑出一个子表表名
                                     String childTableName = table.toLowerCase() + "_" + tagList.get(0);
                                     // 第一列不看，自动填充，为当前时间
                                     log.info("开始处理：" + line);
                                     int update = 0;
                                     try {
-                                        update = jdbcTemplate.update("INSERT INTO " + childTableName + " USING " + table + " TAGS (" + StringUtils.join(tagList, ",") + ") VALUES (NOW, " + StringUtils.join(dataList, ",") + ");");
+                                        update = jdbcTemplate.update("INSERT INTO " + childTableName + " USING " + table + " ("+ StringUtils.join(tagColList, ",")  +")  TAGS (" + StringUtils.join(tagList, ",") + ") ("+StringUtils.join(dataColList, ",")+")  VALUES (NOW, " + StringUtils.join(dataList, ",") + ");");
                                     } catch (DataAccessException e) {
                                         // 不报错
                                         // e.printStackTrace();
@@ -127,6 +132,23 @@ public class DataService {
     public String test() {
         return jdbcTemplate.queryForObject("select now", String.class);
     }
+
+    /**
+     * 在数据库插入数据的过程中，是可以直接修改表结构的，数据库比如MySQL本身会添加MDL锁来解决这些冲突，不需要开发者来考虑这其中的冲突问题，
+     * @param column
+     * @return
+     */
+    public Integer addColumn(String column) {
+        if (StringUtils.isEmpty(column)) {
+            return null;
+        }
+        Set<String> tables = taskConfig.getTables().keySet();
+        String table = tables.iterator().next();
+        String sql = "ALTER STABLE " + table + " ADD COLUMN " + column + " nchar(32) ;";
+        return jdbcTemplate.update(sql);
+    }
+
+
 
     private void init() {
         Set<String> tables = taskConfig.getTables().keySet();

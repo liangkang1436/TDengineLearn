@@ -325,25 +325,25 @@ public class DataFileGenerateService {
     private String getArmyType(String tableName) {
         //     设备编号：01：TJZJC，02：TK，03：LSHJP，04：LDSHJP ，05：QZJ ，06：YJFJDD ，07：TEN ，08：SIXTEEN ，09：DFDDFSC ，10：DFDDYSC';
         if (tableName.endsWith("TJZJC".toLowerCase())) {
-            return "陆军";
+            return "LJ";
         } else if (tableName.endsWith("TK".toLowerCase())) {
-            return "陆军";
+            return "LJ";
         } else if (tableName.endsWith("LSHJP".toLowerCase())) {
-            return "陆军";
+            return "LJ";
         } else if (tableName.endsWith("LDSHJP".toLowerCase())) {
-            return "陆军";
+            return "LJ";
         } else if (tableName.endsWith("QZJ".toLowerCase())) {
-            return "海军";
+            return "HJ";
         } else if (tableName.endsWith("YJFJDD".toLowerCase())) {
-            return "海军";
+            return "HJ";
         } else if (tableName.endsWith("TEN".toLowerCase())) {
-            return "空军";
+            return "KJ";
         } else if (tableName.endsWith("SIXTEEN".toLowerCase())) {
-            return "空军";
+            return "KJ";
         } else if (tableName.endsWith("DFDDFSC".toLowerCase())) {
-            return "网军";
+            return "WJ";
         } else if (tableName.endsWith("DFDDYSC".toLowerCase())) {
-            return "网军";
+            return "WJ";
         }
         return "";
     }

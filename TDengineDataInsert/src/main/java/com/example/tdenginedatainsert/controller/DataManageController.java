@@ -40,6 +40,11 @@ public class DataManageController {
         return dataService.test();
     }
 
+    @RequestMapping("/addColumn")
+    public int test(String name) {
+        return dataService.addColumn(name);
+    }
+
     @RequestMapping("/stop")
     public String stop() {
         dataService.stopInsert();
