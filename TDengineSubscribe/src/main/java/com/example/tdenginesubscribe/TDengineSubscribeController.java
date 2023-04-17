@@ -46,6 +46,7 @@ public class TDengineSubscribeController {
         }
         List<String> topics = Collections.singletonList("topic_1623215095759613953_dock");
         try {
+            // TDEngine 主题订阅，只能通过原生链接，不能通过rest连接
             taosConsumer.subscribe(topics);
         } catch (SQLException e) {
             throw new RuntimeException(e);
